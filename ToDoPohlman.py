@@ -99,7 +99,7 @@ class ToDoList:
         self.name = name
         self.tasks = tasks
         self.priority_queue = PriorityQueue()
-        self.size = 0
+        self.size = len(tasks)
 
     def isEmpty(self):
         return self.size == 0
@@ -114,12 +114,15 @@ class ToDoList:
     def remove_task(self, task_to_remove):
         if self.isEmpty():
             raise Exception(f'{self.name} list is currently empty')
+
         remove_index = self.tasks.index(task_to_remove)
         del self.tasks[remove_index]
         self.size -= 1
 
     def __str__(self):
         list_str = ''
+        if self.isEmpty():
+            return f'{self.name} list is currently empty'
         for task in self.tasks:
             list_str += f'Task[Title={task.title}: Priority={task.priority}], '
         return list_str

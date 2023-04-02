@@ -28,6 +28,13 @@ def main():
 
     print(list1)
 
+    list1.remove_task(t2)
+
+    print(list1)
+
+    list1.remove_task(t1)
+    print(list1)
+
 
 
 if __name__ == '__main__':
