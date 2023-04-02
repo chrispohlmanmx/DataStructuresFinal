@@ -27,6 +27,7 @@ def main():
     list1 = ToDoList("Main", tasks)
 
     print(list1)
+    print(f'Priority queue {list1.display_priority_queue()}')
 
     list1.remove_task(t2)
 

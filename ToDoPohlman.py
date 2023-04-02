@@ -56,6 +56,10 @@ class PriorityQueue:
         else:
             return self.head.title
 
+    def delete_task(self, task):
+        #TODO
+        pass
+
     def display(self):
         display_string = ''
         if self.isEmpty():
@@ -63,7 +67,7 @@ class PriorityQueue:
         else:
             temp = self.head
             while temp:
-                display_string += f'title: {temp.title} Priority: {temp.priority}\n'
+                display_string += f'Task[title: {temp.title} Priority: {temp.priority}], '
                 temp = temp.next
         return display_string
 
@@ -72,6 +76,7 @@ class Task:
         self._title = title
         self.priorities = [1, 2, 3, 4, 5] #higher number will be higher priority
         self.priority = priority_value
+        self.next = None
 
     @property
     def priority(self):
@@ -98,13 +103,14 @@ class ToDoList:
     def __init__(self, name, tasks: [Task]):
         self.name = name
         self.tasks = tasks
-        self.priority_queue = PriorityQueue()
+        self.priority_queue = self.create_priority_queue()
         self.size = len(tasks)
 
     def isEmpty(self):
         return self.size == 0
     def add_task(self, task: Task):
         self.tasks.append(task)
+        self.priority_queue.push(task)
         self.size += 1
 
     def update_task(self, task_to_change, new_task):
@@ -117,7 +123,14 @@ class ToDoList:
 
         remove_index = self.tasks.index(task_to_remove)
         del self.tasks[remove_index]
+        #TODO also remove from priority queue
         self.size -= 1
+
+    def create_priority_queue(self):
+        pq = PriorityQueue()
+        for task in self.tasks:
+            pq.push(task.title, task.priority)
+        return pq
 
     def __str__(self):
         list_str = ''
@@ -126,4 +139,7 @@ class ToDoList:
         for task in self.tasks:
             list_str += f'Task[Title={task.title}: Priority={task.priority}], '
         return list_str
+
+    def display_priority_queue(self):
+        return self.priority_queue.display()
 
