@@ -68,30 +68,30 @@ class PriorityQueue:
         return display_string
 
 class Task:
-    def __init__(self, title, priority):
-        self.title = title
-        self.priority = self.priority(priority)
-        self.priorities = [1,2,3,4,5] #higher number will be higher priority
+    def __init__(self, title, priority_value):
+        self._title = title
+        self.priorities = [1, 2, 3, 4, 5] #higher number will be higher priority
+        self.priority = priority_value
 
     @property
     def priority(self):
-        return self.priority
+        return self._priority
 
     @priority.setter
     def priority(self, value):
         if value in self.priorities:
-            self.priority = value
+            self._priority = value
         else:
             raise ValueError(f'Given value not in allowed list of priority levels {self.priorities}')
 
 
     @property
     def title(self):
-        return self.title
+        return self._title
 
     @title.setter
     def title(self, value):
-        self.title = value
+        self._title = value
 
 
 class ToDoList:
@@ -118,4 +118,9 @@ class ToDoList:
         del self.tasks[remove_index]
         self.size -= 1
 
+    def __str__(self):
+        list_str = ''
+        for task in self.tasks:
+            list_str += f'Task[Title={task.title}: Priority={task.priority}], '
+        return list_str
 
