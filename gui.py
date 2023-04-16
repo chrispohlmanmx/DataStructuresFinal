@@ -21,7 +21,7 @@ Y_POS = 20
 
 # button dimensions
 BUTTON_WIDTH = 20
-BUTTON_HEIGHT = 2
+BUTTON_HEIGHT = 1
 
 # initialize main window
 window.title("ToDo List App")
@@ -42,9 +42,6 @@ edit_button = tk.Button(window, text="Edit", background='yellow', foreground='bl
 # create remove button
 remove_button = tk.Button(window, text='Remove', background='red', foreground='black', width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-#temp placement for testing
-edit_button.place(x=300, y=30)
-remove_button.place(x=500, y=30)
 
 # create labels for rows of to-do items
 task_label = tk.Label(text='Task', foreground='black', width=30, height=2)
@@ -56,7 +53,19 @@ task_label.place(x=50, y=150)
 priority_label.place(x=400, y=150)
 done_delete_label.place(x=600, y=150)
 
+# loop through all tasks and display on screen
+count = 0
+for todo_item in todo_list:
+    task_name_label = tk.Label(text=f'{todo_item[0]}', foreground='white', background='grey', width=30, height=1)
+    task_priority_label = tk.Label(text=f'{todo_item[1]}', foreground='white', background='grey', width=30, height=1)
+    remove_button = tk.Button(window, text='Remove', background='red', foreground='black', width=BUTTON_WIDTH,
+                              height=BUTTON_HEIGHT)
 
+    y_pos = 200 + (30 * count)
+    task_name_label.place(x=50, y=y_pos)
+    task_priority_label.place(x=400, y=y_pos)
+    remove_button.place(x=630, y=y_pos)
+    count += 1
 # run tkinter main event loop
 window.mainloop()
 
