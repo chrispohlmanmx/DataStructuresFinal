@@ -1,6 +1,7 @@
 # This file will hold the code for the gui which I plan to make using tKinter
 
 import tkinter as tk
+from ToDoPohlman import ToDoList as tdl
 
 
 
