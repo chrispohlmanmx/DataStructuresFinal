@@ -3,7 +3,7 @@
 import tkinter as tk
 from functools import partial
 
-from ToDoPohlman import ToDoList as tdl, Task
+from ToDoPohlman import ToDoList, Task
 
 class App:
     def __init__(self):
@@ -18,19 +18,26 @@ class App:
         # button dimensions
         self.BUTTON_WIDTH = 20
         self.BUTTON_HEIGHT = 1
+
+        self.todo_list = ToDoList("Main", [])
+
         self.window.title("ToDo List App")
         self.window.geometry(f'{self.WIDTH}x{self.HEIGHT}+{self.X_POS}+{self.Y_POS}')
+
+
         self.create_render_main_screen()
+
+
 
     def create_render_main_screen(self):
 
         # create new to-do button
-        new_todo_button = tk.Button(self.window, text="New ToDo", background='green', foreground='white', width=self.BUTTON_WIDTH,
+        self.new_todo_button = tk.Button(self.window, text="New ToDo", background='green', foreground='white', width=self.BUTTON_WIDTH,
                                     height=self.BUTTON_HEIGHT, command=self.create_new_todo)
-        new_todo_button.place(x=30, y=30)
+        self.new_todo_button.place(x=30, y=30)
 
         # create label for list title
-        list_title = tk.Label(text=f'{list1.name}', foreground='black', width=30, height=2)
+        list_title = tk.Label(text=f'{self.todo_list.name or "Master"}', foreground='black', width=30, height=2)
         list_title.place(x=300, y=100)
 
         # create edit button
@@ -53,7 +60,7 @@ class App:
 
         # loop through all tasks and display on screen
         count = 0
-        for todo_item in list1.tasks:
+        for todo_item in self.todo_list.tasks:
             task_name_label = tk.Label(text=f'{todo_item.title}', foreground='white', background='grey', width=30,
                                        height=1)
             task_priority_label = tk.Label(text=f'{todo_item.priority}', foreground='white', background='grey',
@@ -70,7 +77,37 @@ class App:
         self.window.mainloop()
 
     def create_new_todo(self):
-        print('called')
+        self.popup = tk.Tk()
+        self.popup.title("Enter new To do item details")
+        self.popup.geometry(f'{self.WIDTH}x{self.HEIGHT}+{self.X_POS}+{self.Y_POS}')
+        todo_title = tk.Label(self.popup, text='Task Name', foreground='black', width=30, height=2)
+        todo_title.pack()
+        self.todo_title_entry = tk.Entry(self.popup)
+        self.todo_title_entry.pack()
+        todo_priority = tk.Label(self.popup, text='Priority', foreground='black', width=30, height=2)
+        todo_priority.pack()
+        self.todo_priority_entry = tk.Entry(self.popup)
+        self.todo_priority_entry.pack()
+
+        add_button = tk.Button(self.popup, text="Add New ToDo", background='green', foreground='white', width=self.BUTTON_WIDTH,
+                               height=self.BUTTON_HEIGHT, command=self.submit_new_todo)
+
+        add_button.pack()
+        self.popup.mainloop()
+
+    def submit_new_todo(self):
+        print("called new todo submission")
+        # print(name, priority, sep="\n")
+        new_task_title = self.todo_title_entry.get()
+        new_task_priority = self.todo_priority_entry.get()
+        new_task_priority = int(new_task_priority)
+        new_task = Task(new_task_title, new_task_priority)
+        self.todo_list.add_task(new_task)
+        self.popup.destroy()
+        print(self.todo_list)
+        self.create_render_main_screen()
+
+
 
     def remove_item(self, tdl, todo_item):
         tdl.remove_task(todo_item)
@@ -84,15 +121,6 @@ class App:
 
 
 
-
-
-
-
-
-
-
-
-
 # initialize main window
 if __name__ == '__main__':
     # Data for testing
@@ -101,7 +129,7 @@ if __name__ == '__main__':
 
     tasks = [t1, t2]
 
-    list1 = tdl("Main", tasks)
+    list1 = ToDoList("Main", tasks)
     App()
 
 
