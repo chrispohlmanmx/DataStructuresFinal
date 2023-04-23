@@ -69,7 +69,6 @@ class App:
     def remove_item(self, tdl, todo_item):
         tdl.remove_task(todo_item)
         self.refresh()
-        print("called")
 
     def refresh(self):
         self.window.destroy()
@@ -80,18 +79,7 @@ class App:
 
 
 
-# Data for testing
-list_title = "Temp for Testing"
-todo_list = [("Finish homework due today", 5), ('Go to class', 5), ('Research Job Openings', 4), ('Go to gym', 3),
-             ('Take out trash', 2), ('Organize garage', 1)]
-task_name = todo_list[0][0]
-priority = todo_list[0][1]
-t1 = Task("Finish Final Project", 5)
-t2 = Task("finish fundamental informatics", 2)
 
-tasks = [t1, t2]
-
-list1 = tdl("Main", tasks)
 
 
 
@@ -101,6 +89,13 @@ list1 = tdl("Main", tasks)
 
 # initialize main window
 if __name__ == '__main__':
+    # Data for testing
+    t1 = Task("Finish Final Project", 5)
+    t2 = Task("finish fundamental informatics", 2)
+
+    tasks = [t1, t2]
+
+    list1 = tdl("Main", tasks)
     App()
 
 
