@@ -20,10 +20,13 @@ class App:
         self.BUTTON_HEIGHT = 1
         self.window.title("ToDo List App")
         self.window.geometry(f'{self.WIDTH}x{self.HEIGHT}+{self.X_POS}+{self.Y_POS}')
+        self.create_render_main_screen()
+
+    def create_render_main_screen(self):
 
         # create new to-do button
         new_todo_button = tk.Button(self.window, text="New ToDo", background='green', foreground='white', width=self.BUTTON_WIDTH,
-                                    height=self.BUTTON_HEIGHT)
+                                    height=self.BUTTON_HEIGHT, command=self.create_new_todo)
         new_todo_button.place(x=30, y=30)
 
         # create label for list title
@@ -65,6 +68,9 @@ class App:
             count += 1
         # run tkinter main event loop
         self.window.mainloop()
+
+    def create_new_todo(self):
+        print('called')
 
     def remove_item(self, tdl, todo_item):
         tdl.remove_task(todo_item)
