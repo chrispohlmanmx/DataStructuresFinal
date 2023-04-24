@@ -60,7 +60,9 @@ class App:
 
         # loop through all tasks and display on screen
         count = 0
-        for todo_item in self.todo_list.tasks:
+        q = self.todo_list.create_priority_queue()
+        while q.isEmpty() == False:
+            todo_item = q.pop()
             task_name_label = tk.Label(text=f'{todo_item.title}', foreground='white', background='grey', width=30,
                                        height=1)
             task_priority_label = tk.Label(text=f'{todo_item.priority}', foreground='white', background='grey',
@@ -96,15 +98,12 @@ class App:
         self.popup.mainloop()
 
     def submit_new_todo(self):
-        print("called new todo submission")
-        # print(name, priority, sep="\n")
         new_task_title = self.todo_title_entry.get()
         new_task_priority = self.todo_priority_entry.get()
         new_task_priority = int(new_task_priority)
         new_task = Task(new_task_title, new_task_priority)
         self.todo_list.add_task(new_task)
         self.popup.destroy()
-        print(self.todo_list)
         self.create_render_main_screen()
 
 

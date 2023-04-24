@@ -110,7 +110,7 @@ class ToDoList:
         return self.size == 0
     def add_task(self, task: Task):
         self.tasks.append(task)
-        self.priority_queue.push(task, task.priority)
+        self.priority_queue.push(task.title, task.priority)
         self.size += 1
 
     def update_task(self, task_to_change, new_task):
