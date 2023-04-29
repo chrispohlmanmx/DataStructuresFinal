@@ -15,26 +15,11 @@
 * to my program.
 """
 
-from ToDoPohlman import ToDoList, Task
+from gui import App
 
 
 def main():
-    t1 = Task("Finish Final Project", 5)
-    t2 = Task("finish fundamental informatics", 2)
-
-    tasks = [t1, t2]
-
-    list1 = ToDoList("Main", tasks)
-
-    print(list1)
-    print(f'Priority queue {list1.display_priority_queue()}')
-
-    list1.remove_task(t2)
-
-    print(list1)
-
-    list1.remove_task(t1)
-    print(list1)
+    App()
 
 
 

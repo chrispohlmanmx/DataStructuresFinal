@@ -135,9 +135,7 @@ class App:
 
 
     def remove_item(self, tdl, todo_item):
-        print(tdl)
         tdl.remove_task(todo_item)
-        print(tdl)
         self.refresh()
 
     def refresh(self):
@@ -150,13 +148,6 @@ class App:
 
 # initialize main window
 if __name__ == '__main__':
-    # Data for testing
-    t1 = Task("Finish Final Project", 5)
-    t2 = Task("finish fundamental informatics", 2)
-
-    tasks = [t1, t2]
-
-    list1 = ToDoList("Main", tasks)
     App()
 
 
