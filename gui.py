@@ -20,7 +20,6 @@ class App:
         self.BUTTON_HEIGHT = 1
 
         self.todo_list = ToDoList("Main", tdl)
-        print(self.todo_list)
 
         self.window.title("ToDo List App")
         self.window.geometry(f'{self.WIDTH}x{self.HEIGHT}+{self.X_POS}+{self.Y_POS}')
