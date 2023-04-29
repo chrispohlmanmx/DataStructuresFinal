@@ -76,6 +76,7 @@ class Task:
         self._title = title
         self.priorities = [1, 2, 3, 4, 5] #higher number will be higher priority
         self._priority = priority_value
+        self.next = None
 
     @property
     def priority(self):
