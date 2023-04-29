@@ -98,6 +98,9 @@ class Task:
     def title(self, value):
         self._title = value
 
+    def __str__(self):
+        return f"Title:{self.title}, Priority:{self.priority}"
+
 
 class ToDoList:
     def __init__(self, name, tasks: [Task]):
