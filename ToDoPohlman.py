@@ -114,17 +114,29 @@ class ToDoList:
         self.size += 1
 
     def update_task(self, task_to_change, new_task):
-        update_index = self.tasks.index(task_to_change)
-        self.tasks[update_index] = new_task
+        counter = -1
+        for task in self.tasks:
+            counter += 1
+            if task.title == task_to_change.title:
+                update_index = counter
+                self.tasks[update_index] = new_task
+                return
+        raise Exception(f"{task_to_change} wasn't found in list")
+
+
 
     def remove_task(self, task_to_remove):
         if self.isEmpty():
             raise Exception(f'{self.name} list is currently empty')
-
-        remove_index = self.tasks.index(task_to_remove)
-        del self.tasks[remove_index]
-        #TODO also remove from priority queue
-        self.size -= 1
+        counter = -1
+        for task in self.tasks:
+            counter += 1
+            if task.title == task_to_remove.title:
+                remove_index = counter
+                del self.tasks[remove_index]
+                self.size -= 1
+                return
+        raise Exception(f'{task_to_remove} is not in list')
 
     def create_priority_queue(self):
         pq = PriorityQueue()
